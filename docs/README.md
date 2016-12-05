@@ -63,6 +63,5 @@ Constructibles is a web application modeled after Instructables. It was built us
 
 ### Bonus Features (TBD)
 - [ ] Categories
-- [ ] Keywords
 - [ ] Project Search
 - [ ] Featured project channels
