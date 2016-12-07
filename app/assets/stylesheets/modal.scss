@@ -1,0 +1,72 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #000;
+  opacity: .7;
+  z-index: 9;
+}
+
+.modal {
+  background: white;
+  z-index: 10;
+  position: relative;
+  border: 1px solid #000;
+  padding: 20px;
+  padding-top: 9px;
+  margin: 0 auto;
+  width: 280px;
+  border-radius: 6px;
+
+  h3 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  input {
+    width: 100%;
+    box-sizing: border-box;
+    height: 28px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  button:hover {
+    cursor: pointer;
+  }
+
+  .btn-submit {
+    width: 100%;
+    background: #e86c00;
+    border: 1px solid #cf6000;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 17.5px;
+    text-transform: capitalize;
+    padding: 11px 19px;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 20px;
+  }
+
+  .btn-close {
+    background: transparent;
+    float: right;
+    border: 0;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    color: #ccc;
+  }
+
+  .btn-close:hover {
+    color: #888;
+  }
+
+
+}

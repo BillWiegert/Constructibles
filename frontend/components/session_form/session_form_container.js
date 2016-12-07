@@ -7,8 +7,7 @@ const mapStateToProps = (state) => ({
   errors: state.errors
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  const formType = ownProps.location.pathname.slice(1);
+const mapDispatchToProps = (dispatch, { formType }) => {
   const formAction = (formType === 'login') ? login : signup;
 
   return {

@@ -13,21 +13,21 @@ class SessionForm extends React.Component {
     this.updateUsername = this.updateUsername.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
   }
-  
-  componentDidUpdate() {
-    this.redirectOnLogin();
-  }
 
-  redirectOnLogin() {
-    if (this.props.loggedIn) {
-      this.props.router.push("/");
-    }
-  }
+  // componentDidUpdate() {
+  //   this.redirectOnLogin();
+  // }
+  //
+  // redirectOnLogin() {
+  //   if (this.props.loggedIn) {
+  //     this.props.router.push("/");
+  //   }
+  // }
 
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.processForm(user).then(() => this.props.router.push("/"));
+    this.props.processForm(user);
   }
 
   oppositeLink() {
@@ -64,8 +64,7 @@ class SessionForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit} className="AuthForm">
-        <h2>{this.props.formType}</h2>
-        {this.oppositeLink()}
+        <h3>{this.props.formType}</h3>
         {this.displayErrors()}
 
         <label>Username
@@ -83,7 +82,8 @@ class SessionForm extends React.Component {
             onChange={this.updatePassword}
           />
         </label>
-        <input type="submit" value="Submit" />
+        <button className="btn-submit" type="submit">{this.props.formType}</button>
+        {this.oppositeLink()}
       </form>
     );
   }
