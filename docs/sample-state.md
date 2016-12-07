@@ -25,6 +25,7 @@
         cover_image_url: "imgur.com/ejifis1"
       }  
     },
+    order: [1,2],
     detail: {
       id: 1,
       title: "DIY Scratching Post",

@@ -5,8 +5,8 @@
 [Trello link][trello]
 
 
-[heroku]: http://www.herokuapp.com
-[trello]: https://trello.com
+[heroku]: https://constructibles.herokuapp.com
+[trello]: https://trello.com/b/pXr7RJrL/constructibles
 
 ## Minimum Viable Product
 

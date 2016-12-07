@@ -11,7 +11,6 @@
 ### Users
 
 - `POST /api/users`
-- `DELETE /api/users`
 
 ### Session
 
@@ -30,9 +29,9 @@
 
 - `POST /api/projects/:id/comments`
 - `PATCH /api/comments/:id`
-- `DELTE /api/comments/:id`
+- `DELETE /api/comments/:id`
 
 ### Categories
 
 - `GET api/categories`
-- `GET api/categories/:id` 
+- `GET api/categories/:id`

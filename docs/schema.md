@@ -13,6 +13,7 @@ column name|data type|details
 ---|---|---
 id|integer|not null, primary key
 title|string|not null
+cover_image_url|string|not null
 intro|string|not null
 keywords|string|not null, array: true, default: []
 user_id|integer|not null, foreign key (references users), indexed
@@ -31,6 +32,7 @@ column name|data type|details
 ---|---|---
 id|integer|not null, primary key
 body|text|not null
+image_url|string|allow null
 order|integer|not null
 project_id|integer|not null, foreign key (references projects)
 
