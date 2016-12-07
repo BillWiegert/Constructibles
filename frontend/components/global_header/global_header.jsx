@@ -17,11 +17,12 @@ class GlobalHeader extends React.Component {
   }
 
   openModal(e) {
-    console.log(e.currentTarget.id);
+    e.preventDefault();
     this.setState({ isModalOpen: true });
   }
 
-  closeModal() {
+  closeModal(e) {
+    e.preventDefault();
     this.setState({ isModalOpen: false });
   }
 
@@ -44,7 +45,9 @@ class GlobalHeader extends React.Component {
         <a href="#" id="login" onClick={this.openModal}>Login</a>
         <Modal isOpen={this.state.isModalOpen}
           closeCallback={this.closeModal}
-          transitionName="modal-anim">
+          transitionName="modal-anim"
+          addClass="auth-modal"
+        >
           <button className="btn-close" onClick={this.closeModal}>X</button>
           <SessionFormContainer formType={'login'} />
         </Modal>

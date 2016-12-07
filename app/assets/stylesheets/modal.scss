@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'complete_in_him';
+    src: asset-url('complete_in_him-webfont.woff2') format('woff2'),
+         asset-url('complete_in_him-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -12,17 +20,20 @@
 .modal {
   background: white;
   z-index: 10;
-  position: relative;
+  position: absolute;
   border: 1px solid #000;
   padding: 20px;
   padding-top: 9px;
   margin: 0 auto;
   width: 280px;
   border-radius: 6px;
+  margin-left: -161px;
+  left: 50%;
 
   h3 {
     font-size: 28px;
     margin-bottom: 20px;
+    font-family: complete_in_him;
   }
 
   input {

@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-const Modal = ({ isOpen, closeCallback, transitionName, children }) => {
+const Modal = ({ isOpen, closeCallback, transitionName, addClass, children }) => {
   if(isOpen) {
     return (
       // <container className="modal-container">
         <ReactCSSTransitionGroup transitionName={transitionName}>
-          <section className="modal">
+          <section className={`modal ${addClass}`}>
             { children }
           </section>
           <div className="modal-backdrop" onClick={closeCallback}></div>
