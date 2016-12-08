@@ -12,8 +12,8 @@
 
 Constructibles is a web application modeled after Instructables. It was built using Ruby on Rails and React/Redux. By the end of week nine this app will, at a minimum, satisfy the following criteria with smooth, bug-free navigation, adequate seed data and sufficient CSS styling:
 
-- [ ] Hosting on Heroku
-- [ ] New Account creation, login, and guest/demo login
+- [x] Hosting on Heroku
+- [x] New Account creation, login, and guest/demo login
 - [ ] Projects
 - [ ] Commenting on Projects
 - [ ] Adding photos and videos to Projects
