@@ -13,6 +13,8 @@ class SessionForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateUsername = this.updateUsername.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
+    this.handleGuestLogin = this.handleGuestLogin.bind(this);
+    // this.guestLogin = this.props.guestLogin.bind(this);
   }
 
   handleSubmit(e) {
@@ -23,10 +25,27 @@ class SessionForm extends React.Component {
 
   oppositeLink() {
     if (this.props.formType === "login") {
-      return <button className="btn-session-link" onClick={this.props.toggleForm}>Sign Up »</button>;
+      return <button
+        className="btn-session-link"
+        onClick={this.props.toggleForm}>Sign Up »</button>;
     } else {
-      return <button className="btn-session-link" onClick={this.props.toggleForm}>Login »</button>;
+      return <button
+        className="btn-session-link"
+        onClick={this.props.toggleForm}>Login »</button>;
     }
+  }
+
+  handleGuestLogin(e) {
+    e.preventDefault();
+    this.props.guestLogin().then(() => this.props.closeModal());
+  }
+
+  guestLoginButton() {
+    return (
+      <button
+        className="btn-session-link btn-guest-login"
+        onClick={this.handleGuestLogin}>Login as Guest »</button>
+    );
   }
 
   displayErrors() {
@@ -57,7 +76,7 @@ class SessionForm extends React.Component {
     if (actionName === 'signup') {
       actionName = "sign up";
     }
-    
+
     return (
       <form onSubmit={this.handleSubmit} className="auth-form">
         <header className="auth-form-header">
@@ -85,6 +104,7 @@ class SessionForm extends React.Component {
         </div>
         <footer className="auth-form-footer">
           {this.oppositeLink()}
+          {this.guestLoginButton()}
         </footer>
       </form>
     );

@@ -14,6 +14,10 @@ h1, h2, h3, h4 {
   cursor: pointer;
 }
 
+.btn-guest-login {
+  float: right;
+}
+
 .btn-session-link:hover, .btn-session-link:focus {
   outline: none;
   text-decoration: underline;

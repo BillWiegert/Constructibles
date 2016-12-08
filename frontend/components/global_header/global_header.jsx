@@ -55,9 +55,10 @@ class GlobalHeader extends React.Component {
   logoutLink() {
     return (
       <section className="current-user-nav">
-        <a
-          className="current-user-link"
-          >Logged in as {this.props.currentUser.username}</a>
+        <button
+          className="btn-session-link current-user-link"
+          >{this.props.currentUser.username}</button>
+        <span className="pipe">|</span>
         <button
           className="btn-session-link"
           onClick={this.props.logout}>Log Out</button>
