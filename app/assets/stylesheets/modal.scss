@@ -107,6 +107,14 @@
     font-weight: bold;
     letter-spacing: 1px;
     border-radius: 3px;
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    li:last-child {
+      margin-bottom: 0;
+    }
   }
 
   .auth-form-header, .auth-form-footer {
