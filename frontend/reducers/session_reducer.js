@@ -12,7 +12,7 @@ export default function sessionReducer(state = _nullUser, action) {
       return Object.assign({}, _nullUser, {currentUser});
 
     case RECEIVE_ERRORS:
-      return Object.assign({}, state, {errors: action.error});
+      return Object.assign({}, state, {errors: action.errors});
 
     default:
       return state;

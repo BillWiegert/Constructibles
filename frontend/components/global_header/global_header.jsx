@@ -8,32 +8,56 @@ class GlobalHeader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isModalOpen: false
+      isModalOpen: false,
+      formType: 'login'
     }
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-
+    this.toggleForm = this.toggleForm.bind(this);
+    this.openLoginModal = this.openLoginModal.bind(this);
+    this.openSignUpModal = this.openSignUpModal.bind(this);
   }
 
-  openModal(e) {
-    e.preventDefault();
+  openModal(e = false) {
+    if(e) { e.preventDefault(); }
     this.setState({ isModalOpen: true });
   }
 
-  closeModal(e) {
-    e.preventDefault();
+  closeModal(e = false) {
+    if(e) {e.preventDefault(); }
     this.setState({ isModalOpen: false });
   }
 
-  welcome() {
+  openLoginModal(e) {
+    e.preventDefault();
+    this.setState({formType: 'login'});
+    this.openModal();
+  }
+
+  openSignUpModal(e) {
+    e.preventDefault();
+    this.setState({formType: 'signup'});
+    this.openModal();
+  }
+
+  toggleForm(e) {
+    e.preventDefault();
+    if (this.state.formType === 'login') {
+      this.setState({formType: 'signup'});
+    } else {
+      this.setState({formType: 'login'});
+    }
+  }
+
+  logoutLink() {
     return (
       <section className="current-user-nav">
         <a
           className="current-user-link"
           >Logged in as {this.props.currentUser.username}</a>
         <button
-          className="logout-button"
+          className="btn-session-link"
           onClick={this.props.logout}>Log Out</button>
       </section>
     );
@@ -42,26 +66,56 @@ class GlobalHeader extends React.Component {
   loginLinks() {
     return (
       <nav className="login-nav">
-        <a href="#" id="login" onClick={this.openModal}>Login</a>
-        <Modal isOpen={this.state.isModalOpen}
-          closeCallback={this.closeModal}
-          transitionName="modal-anim"
-          addClass="auth-modal"
-        >
-          <button className="btn-close" onClick={this.closeModal}>X</button>
-          <SessionFormContainer formType={'login'} />
-        </Modal>
+        <button className="btn-session-link" onClick={this.openLoginModal}>Login</button>
+        <span className="pipe">|</span>
+        <button className="btn-session-link" onClick={this.openSignUpModal}>Sign Up</button>
       </nav>
     );
   };
 
-  render() {
+  sessionLinks() {
     if (this.props.currentUser) {
-      return this.welcome();
+      return this.logoutLink();
     } else {
       return this.loginLinks();
     }
-  };
+  }
+
+  sessionModal() {
+    return (
+      <Modal isOpen={this.state.isModalOpen}
+        closeCallback={this.closeModal}
+        transitionName="modal-anim"
+        addClass="auth-modal"
+      >
+        <button className="btn-close" onClick={this.closeModal}>X</button>
+        <SessionFormContainer
+          formType={this.state.formType}
+          toggleForm={this.toggleForm}
+          closeModal={this.closeModal}
+        />
+      </Modal>
+    );
+  }
+
+
+  render() {
+    return (
+      <header className="global-header">
+        <div className="top-bar">
+          <div className="top-bar-nav">
+            <a href="/" className="header-logo"></a>
+            <h2 className="site-title">constructibles</h2>
+            {this.sessionLinks()}
+          </div>
+        </div>
+        <div className="bottom-bar">
+
+        </div>
+        {this.sessionModal()}
+      </header>
+    );
+  }
 
 }
 

@@ -18,21 +18,18 @@
 }
 
 .modal {
-  background: white;
+  background: #FFF;
   z-index: 10;
   position: absolute;
   border: 1px solid #000;
-  padding: 20px;
-  padding-top: 9px;
   margin: 0 auto;
-  width: 280px;
+  width: 320px;
   border-radius: 6px;
   margin-left: -161px;
   left: 50%;
 
   h3 {
     font-size: 28px;
-    margin-bottom: 20px;
     font-family: complete_in_him;
   }
 
@@ -45,6 +42,7 @@
     border-radius: 4px;
     font-size: 14px;
     line-height: 20px;
+    padding: 4px 6px;
   }
 
   button:hover {
@@ -53,16 +51,35 @@
 
   .btn-submit {
     width: 100%;
-    background: #e86c00;
-    border: 1px solid #cf6000;
     border-radius: 6px;
-    color: #fff;
+    border: 1px solid transparent;
+    color: #FFF;
     font-size: 17.5px;
     text-transform: capitalize;
     padding: 11px 19px;
     text-align: center;
     vertical-align: middle;
     margin-bottom: 20px;
+  }
+
+  .btn-login {
+    background: #E86C00;
+    border-color: #CF6000;
+  }
+
+  .btn-signup {
+    background: #5BB75B;
+    border-color: #5BB75B;
+  }
+
+  .btn-login:hover, .btn-login:focus {
+    outline: none;
+    background-color: darken(#E86C00, 5%);
+  }
+
+  .btn-signup:hover, .btn-signup:focus {
+    outline: none;
+    background-color: darken(#5BB75B, 5%);
   }
 
   .btn-close {
@@ -72,12 +89,47 @@
     font-size: 20px;
     font-weight: bold;
     line-height: 20px;
-    color: #ccc;
+    color: #CCC;
+    margin: 9px 20px;
   }
 
   .btn-close:hover {
     color: #888;
   }
 
+  .auth-errors {
+    margin-bottom: 20px;
+    color: #FFF;
+    background: #B94A48;
+    padding: 6px 4px;
+    line-height: 14px;
+    font-size: 11.844px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 3px;
+  }
+
+  .auth-form-header, .auth-form-footer {
+    background: #F5F5F5;
+  }
+
+  .auth-form-header {
+    padding: 9px 20px;
+    border-radius: 6px 6px 0 0;
+    border-bottom: 1px solid #EEE;
+    margin-bottom: 20px;
+  }
+
+  .auth-form-footer {
+    padding: 14px 20px;
+    border-top: 1px solid #EEE;
+    border-radius: 0 0 6px 6px;
+    color: #777;
+  }
+
+  .auth-form-content {
+    width: 280px;
+    padding: 0 20px;
+  }
 
 }

@@ -6,7 +6,8 @@ class SessionForm extends React.Component {
     super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      formType: this.props.formType
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -14,39 +15,29 @@ class SessionForm extends React.Component {
     this.updatePassword = this.updatePassword.bind(this);
   }
 
-  // componentDidUpdate() {
-  //   this.redirectOnLogin();
-  // }
-  //
-  // redirectOnLogin() {
-  //   if (this.props.loggedIn) {
-  //     this.props.router.push("/");
-  //   }
-  // }
-
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.processForm(user);
+    this.props.processForm(user).then(() => this.props.closeModal());
   }
 
   oppositeLink() {
     if (this.props.formType === "login") {
-      return <Link to="/signup">Sign Up</Link>;
+      return <button className="btn-session-link" onClick={this.props.toggleForm}>Sign Up »</button>;
     } else {
-      return <Link to="/login">Log In</Link>;
+      return <button className="btn-session-link" onClick={this.props.toggleForm}>Login »</button>;
     }
   }
 
   displayErrors() {
-    if (!this.props.errors) {
+    if (!this.props.errors.length > 0) {
       return
     }
     return (
       <ul className="auth-errors">
         {this.props.errors.map((err, idx) => (
           <li key={idx}>
-            {error}
+            {err}
           </li>
         ))}
       </ul>
@@ -62,28 +53,38 @@ class SessionForm extends React.Component {
   }
 
   render() {
+    let actionName = this.props.formType;
+    if (actionName === 'signup') {
+      actionName = "sign up";
+    }
     return (
-      <form onSubmit={this.handleSubmit} className="AuthForm">
-        <h3>{this.props.formType}</h3>
-        {this.displayErrors()}
+      <form onSubmit={this.handleSubmit} className="auth-form">
+        <header className="auth-form-header">
+          <h3>{actionName}</h3>
+        </header>
+        <div className="auth-form-content">
 
-        <label>Username
+
           <input
             type="text"
+            placeholder="Username"
             value={this.state.username}
             onChange={this.updateUsername}
           />
-        </label>
 
-        <label>Password
           <input
             type="password"
+            placeholder="Password"
             value={this.state.password}
             onChange={this.updatePassword}
           />
-        </label>
-        <button className="btn-submit" type="submit">{this.props.formType}</button>
-        {this.oppositeLink()}
+
+        {this.displayErrors()}
+        <button className={`btn-submit btn-${this.props.formType}`} type="submit">{actionName}</button>
+        </div>
+        <footer className="auth-form-footer">
+          {this.oppositeLink()}
+        </footer>
       </form>
     );
   }

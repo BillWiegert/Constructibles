@@ -16,16 +16,17 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	font-family: inherit;
 	vertical-align: baseline;
 }
-/* remember to define focus styles! */
-:focus {
-	outline: 0;
-}
+
+// :focus {
+// 	outline: 0;
+// }
+
 body {
 	line-height: 1;
 	color: black;
 	background: white;
-	font-family: "Helvetica Neue";
 }
+
 ol, ul {
 	list-style: none;
 }

@@ -1,0 +1,68 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
+
+h1, h2, h3, h4 {
+  color: #333;
+}
+
+.btn-session-link {
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+.btn-session-link:hover, .btn-session-link:focus {
+  outline: none;
+  text-decoration: underline;
+}
+
+.global-header {
+
+  height: 100px;
+  color: #333;
+
+  .header-logo {
+    display: block;
+    float: left;
+    margin-top: 4px;
+    background-image: asset-url('robot.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 80px;
+    height: 80px;
+  }
+
+  .top-bar {
+    background: #EEE;
+    height: 61px;
+
+    .top-bar-nav {
+      width: 80%;
+      margin: 0 auto;
+
+      .site-title {
+        float: left;
+        font-size: 24px;
+        padding: 4px;
+        margin-top: 15px;
+        font-weight: bold;
+        background: #FFF;
+      }
+
+      .login-nav, .current-user-nav {
+        float: right;
+        margin-top: 20px;
+      }
+    }
+  }
+
+  .bottom-bar {
+    height: 36px;
+    background: #FFF;
+    border-bottom: 1px solid #EEE;
+  }
+
+}

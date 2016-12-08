@@ -9,3 +9,4 @@
 |Comment background|Light gray|#F9F9F9
 |Author's comment background|Light blue|#EEF9FF
 |Project outer background|Blue-Gray|#D4E1E7
+|Error message background|Dark Red|#B94A48
