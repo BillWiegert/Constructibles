@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import GlobalHeader from './global_header';
-import { logout } from '../../actions/session_actions';
+import { logout, clearErrors } from '../../actions/session_actions';
 
 const mapStateToProps = (state) => ({
   currentUser: state.session.currentUser
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  logout: () => dispatch(logout())
+  logout: () => dispatch(logout()),
+  clearErrors: () => dispatch(clearErrors())
 });
 
 export default connect(

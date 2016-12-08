@@ -57,6 +57,7 @@ class SessionForm extends React.Component {
     if (actionName === 'signup') {
       actionName = "sign up";
     }
+    
     return (
       <form onSubmit={this.handleSubmit} className="auth-form">
         <header className="auth-form-header">

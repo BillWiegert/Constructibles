@@ -1,16 +1,12 @@
 ```js
 {
-  currentUser: {
-    id: 1,
-    username: "Bill"
-  },
-
-  errors: {
-    base: [],
-    session: [],
-    project: [],
-    comment: [],
-  },
+  session: {
+    currentUser: {
+      id: 1,
+      username: "Bill"
+    },
+    errors: []
+  }
 
   projects: {
     index: {

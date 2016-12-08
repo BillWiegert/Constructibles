@@ -26,6 +26,7 @@ class GlobalHeader extends React.Component {
 
   closeModal(e = false) {
     if(e) {e.preventDefault(); }
+    this.props.clearErrors();
     this.setState({ isModalOpen: false });
   }
 
@@ -43,6 +44,7 @@ class GlobalHeader extends React.Component {
 
   toggleForm(e) {
     e.preventDefault();
+    this.props.clearErrors();
     if (this.state.formType === 'login') {
       this.setState({formType: 'signup'});
     } else {
