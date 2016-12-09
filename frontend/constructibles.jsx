@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import Root from './components/root';
 import configureStore from './store/store';
 
+import { fetchAllProjects } from './util/project_api_util';
+
 let store;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     store = configureStore();
   }
   window.store = store;
+  window.fetchAllProjects = fetchAllProjects;
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={ store }/>, root);
 });

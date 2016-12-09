@@ -12,6 +12,8 @@
 
 class Project < ActiveRecord::Base
   validates :title, :intro, :user_id, presence: true
-  # has_many :steps
+  
+  belongs_to :user
   # belongs_to :category
+  # has_many :steps
 end

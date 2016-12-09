@@ -101,13 +101,12 @@ class GlobalHeader extends React.Component {
     );
   }
 
-
   render() {
     return (
       <header className="global-header">
         <div className="top-bar">
           <div className="top-bar-nav">
-            <a href="/" className="header-logo"></a>
+            <Link to="/" className="header-logo"></Link>
             <h2 className="site-title">constructibles</h2>
             {this.sessionLinks()}
           </div>

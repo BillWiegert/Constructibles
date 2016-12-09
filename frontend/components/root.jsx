@@ -3,6 +3,8 @@ import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import App from './app';
 import SessionFormContainer from './session_form/session_form_container';
+import ProjectIndexContainer from './project/project_index_container';
+import ProjectDetailsContainer from './project/project_details_container';
 
 const Root = ({ store }) => {
   const _redirectIfLoggedIn = (nextState, replace) => {
@@ -16,8 +18,11 @@ const Root = ({ store }) => {
     <Provider store={ store }>
       <Router history={ hashHistory }>
         <Route path="/" component={ App }>
-          // <Route path="/login" component={ SessionFormContainer } onEnter={ _redirectIfLoggedIn } />
-          // <Route path="/signup" component={ SessionFormContainer } onEnter={ _redirectIfLoggedIn }/>
+          <IndexRoute component={ ProjectIndexContainer } />
+          <Route path="projects" component={ ProjectIndexContainer }>
+          </Route>
+          <Route path="projects/:projectId" component={ ProjectDetailsContainer }>
+          </Route>
         </Route>
       </Router>
     </Provider>

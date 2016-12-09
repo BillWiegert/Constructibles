@@ -21,8 +21,10 @@
         cover_image_url: "imgur.com/ejifis1"
       }  
     },
-    order: [1,2],
-    detail: {
+    order: [1,2]
+  },
+  
+  projectDetail: {
       id: 1,
       title: "DIY Scratching Post",
       intro: "My cat like scratching, so I made this post",
