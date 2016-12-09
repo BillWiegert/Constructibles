@@ -14,7 +14,6 @@ class SessionForm extends React.Component {
     this.updateUsername = this.updateUsername.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
     this.handleGuestLogin = this.handleGuestLogin.bind(this);
-    // this.guestLogin = this.props.guestLogin.bind(this);
   }
 
   handleSubmit(e) {
