@@ -79,7 +79,7 @@ class SessionForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit} className="auth-form">
         <header className="auth-form-header">
-          <h3>{actionName}</h3>
+          <h3 className="fun-font">{actionName}</h3>
         </header>
         <div className="auth-form-content">
 

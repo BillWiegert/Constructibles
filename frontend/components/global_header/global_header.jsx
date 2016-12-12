@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, withRouter } from 'react-router';
 import Modal from '../modal';
 import SessionFormContainer from '../session_form/session_form_container';
 
@@ -17,6 +17,7 @@ class GlobalHeader extends React.Component {
     this.toggleForm = this.toggleForm.bind(this);
     this.openLoginModal = this.openLoginModal.bind(this);
     this.openSignUpModal = this.openSignUpModal.bind(this);
+    this.handlePublish = this.handlePublish.bind(this);
   }
 
   openModal(e = false) {
@@ -25,19 +26,19 @@ class GlobalHeader extends React.Component {
   }
 
   closeModal(e = false) {
-    if(e) {e.preventDefault(); }
+    if(e) { e.preventDefault(); }
     this.props.clearErrors();
     this.setState({ isModalOpen: false });
   }
 
   openLoginModal(e) {
-    e.preventDefault();
+    if(e) { e.preventDefault(); }
     this.setState({formType: 'login'});
     this.openModal();
   }
 
   openSignUpModal(e) {
-    e.preventDefault();
+    if(e) { e.preventDefault(); }
     this.setState({formType: 'signup'});
     this.openModal();
   }
@@ -52,9 +53,18 @@ class GlobalHeader extends React.Component {
     }
   }
 
+  handlePublish(e) {
+    e.preventDefault();
+    if (this.props.currentUser) {
+      this.props.router.push('/projects/new');
+    } else {
+      this.openLoginModal();
+    }
+  }
+
   logoutLink() {
     return (
-      <section className="current-user-nav">
+      <nav className="current-user-nav">
         <button
           className="btn-session-link current-user-link"
           >{this.props.currentUser.username}</button>
@@ -62,7 +72,7 @@ class GlobalHeader extends React.Component {
         <button
           className="btn-session-link"
           onClick={this.props.logout}>Log Out</button>
-      </section>
+      </nav>
     );
   }
 
@@ -82,6 +92,29 @@ class GlobalHeader extends React.Component {
     } else {
       return this.loginLinks();
     }
+  }
+
+  searchBar() {
+    return (
+      <div className="search-bar">
+        <form className="header-search-form">
+          <label className="header-search-label fun-font">let's make</label>
+          <input className="header-search-input" type="text"></input>
+          <Link to="/projects" className="material-icons md-light header-search-btn">
+            search
+          </Link>
+        </form>
+      </div>
+    )
+  }
+
+  navButtons() {
+    return (
+      <nav className="header-nav">
+        <Link className="explore btn btn-clear" to="projects">Explore</Link>
+        <button className="publish btn btn-clear" onClick={this.handlePublish}>Publish</button>
+      </nav>
+    );
   }
 
   sessionModal() {
@@ -105,10 +138,16 @@ class GlobalHeader extends React.Component {
     return (
       <header className="global-header">
         <div className="top-bar">
-          <div className="top-bar-nav">
+          <div className="top-bar-container">
             <Link to="/" className="header-logo"></Link>
-            <h2 className="site-title">constructibles</h2>
-            {this.sessionLinks()}
+            <div className="top-bar-nav">
+              <h2 className="site-title">constructibles</h2>
+              {this.searchBar()}
+              {this.navButtons()}
+            </div>
+            <div className="session-nav">
+              {this.sessionLinks()}
+            </div>
           </div>
         </div>
         <div className="bottom-bar">
@@ -121,4 +160,4 @@ class GlobalHeader extends React.Component {
 
 }
 
-export default GlobalHeader;
+export default withRouter(GlobalHeader);

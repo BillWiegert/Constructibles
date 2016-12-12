@@ -1,14 +1,31 @@
 .cover-image {
   display: block;
-  float: left;
-  margin-top: 4px;
-  background-image: asset-url('robot.png');
+  background-image: asset-url('covers/carrestoration.jpg');
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
   width: 200px;
   height: 200px;
 }
 
 .project-index-item {
-  float: left;
+  margin: 15px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+
+  .project-info-bar {
+    padding: 10px;
+  }
+}
+
+.project-index-item:hover {
+  box-shadow: 1px 1px 2px 0 #ccc;
+  border-color: #aaa;
+}
+
+.project-index {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }

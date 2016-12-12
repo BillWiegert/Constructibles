@@ -30,3 +30,24 @@ export const fetchSingleProject = (id) => {
     .then((project) => dispatch(receiveProject(project)));
   };
 };
+
+export const createProject = (project) => {
+  return (dispatch) => {
+    return APIUtil.createProject(project)
+    .then((project) => dispatch(receiveProject(project)),
+      (err) => dispatch(receiveErrors(err.responseJSON)));
+  };
+};
+
+export const editProject = (project) => {
+  return (dispatch) => {
+    return APIUtil.editProject(project)
+    .then((project) => dispatch(receiveProject(project)),
+      (err) => dispatch(receiveErrors(err.responseJSON)));
+  };
+};
+export const deleteProject = (id) => {
+  return (dispatch) => {
+    return APIUtil.deleteProject(id)
+  };
+};

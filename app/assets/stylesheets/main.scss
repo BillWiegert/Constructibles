@@ -1,10 +1,53 @@
+@font-face {
+    font-family: 'complete_in_him';
+    src: asset-url('complete_in_him-webfont.woff2') format('woff2'),
+         asset-url('complete_in_him-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
+  background-color: #F6F6F6;
 }
 
 h1, h2, h3, h4 {
   color: #333;
+}
+
+textarea, input[type="text"], input[type="password"] {
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+@media all and (max-width: 1050px) {
+  .top-bar-container {
+    width: 100%;
+    min-width: 810px;
+  }
+}
+
+@media all and (min-width: 1051px) {
+  .top-bar-container {
+    width: 80%;
+  }
+}
+
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+
+.search-icon {
+  padding: 10px;
+}
+
+.clearfix:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+.fun-font {
+  font-family: complete_in_him;
 }
 
 .btn-session-link {
@@ -28,9 +71,14 @@ h1, h2, h3, h4 {
   height: 100px;
   color: #333;
 
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+
   .header-logo {
     display: block;
-    float: left;
+    position: absolute;
     margin-top: 4px;
     background-image: asset-url('robot.png');
     background-repeat: no-repeat;
@@ -39,28 +87,90 @@ h1, h2, h3, h4 {
     height: 80px;
   }
 
+  .header-search-form {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-search-label {
+    font-size: 20px;
+  }
+
+  .header-search-input {
+    width: 150px;
+    padding: 4px 6px;
+    font-size: 14px;
+    border-radius: 4px 0 0 4px;
+    height: 34px;
+    box-sizing: border-box;
+    margin-left: 6px;
+  }
+
+  .header-search-btn {
+    padding: 4px;
+    border: 1px solid #ccc;
+    background-color: #ccc;
+    border-left: 0;
+    border-radius: 0 4px 4px 0;
+    box-sizing: border-box;
+    text-decoration: none;
+  }
+
+  .btn {
+    padding: 9px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    float: left;
+    margin-left: 20px;
+  }
+
+  .btn:hover {
+    cursor: pointer;
+    border-color: #aaa;
+  }
+
+  .btn:first-child {
+    margin-left: 0;
+  }
+
   .top-bar {
     background: #EEE;
     height: 61px;
 
-    .top-bar-nav {
-      width: 80%;
+    .top-bar-container {
       margin: 0 auto;
 
       .site-title {
         float: left;
         font-size: 24px;
         padding: 4px;
-        margin-top: 15px;
         font-weight: bold;
         background: #FFF;
       }
 
+      .search-bar, .header-nav {
+        margin-left: 20px;
+      }
+
       .login-nav, .current-user-nav {
         float: right;
-        margin-top: 20px;
       }
     }
+  }
+
+  .top-bar-nav {
+    float: left;
+    display: flex;
+    align-items: center;
+    height: 61px;
+    margin-left: 70px;
+  }
+
+  .session-nav {
+    float: right;
+    display: flex;
+    align-items: center;
+    height: 61px;
   }
 
   .bottom-bar {

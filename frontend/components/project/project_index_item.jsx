@@ -3,8 +3,10 @@ import { Link } from 'react-router';
 
 const ProjectIndexItem = ({ project, router }) => {
   return (
-    <Link to={ `/projects/${project.id}` }>
-      <div className="cover-image"></div>
+    <div>
+      <Link to={ `/projects/${project.id}` }>
+        <div className="cover-image"></div>
+      </Link>
       <div className="project-info-bar">
         <span className="title">
           { project.title }
@@ -14,7 +16,7 @@ const ProjectIndexItem = ({ project, router }) => {
           { project.user.username }
         </span>
       </div>
-    </Link>
+    </div>
   );
 };
 

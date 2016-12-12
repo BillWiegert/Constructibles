@@ -19,7 +19,7 @@ class Api::ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    if @project.user_id == current_user.id
+    if @project.user_id != current_user.id
       render json: ["You can't edit projects you didn't create!"]
     else
       if @project.update(project_params)

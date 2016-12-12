@@ -16,7 +16,7 @@ export const createProject = (project) => {
   return $.ajax({
     method: 'POST',
     url: 'api/projects',
-    data: project
+    data: {project}
   })
 }
 
@@ -24,7 +24,7 @@ export const editProject = (project) => {
   return $.ajax({
     method: 'PATCH',
     url: `api/projects/${project.id}`,
-    data: project
+    data: {project}
   })
 }
 
