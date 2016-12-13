@@ -5,7 +5,7 @@ import { RECEIVE_PROJECTS } from '../actions/project_actions';
 //   order: []
 // })
 
-const defaultState = {};
+const defaultState = Object.freeze({});
 
 export default function projectsReducer(state = defaultState, action) {
   Object.freeze(state);

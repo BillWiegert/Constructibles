@@ -10,14 +10,18 @@ class ProjectForm extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.updateIntro = this.updateIntro.bind(this);
     this.updateTitle = this.updateTitle.bind(this);
     this.updateState = this.updateState.bind(this);
   }
 
   componentWillMount() {
-    this.props.fetchSingleProject(this.props.params.projectId)
-    .then(this.updateState);
+    this.props.clearProjectErrors();
+    if (this.props.formType === "edit") {
+      this.props.fetchSingleProject(this.props.params.projectId)
+      .then(this.updateState);
+    }
   }
 
   updateState() {
@@ -27,14 +31,27 @@ class ProjectForm extends React.Component {
     });
   }
 
- handleSubmit(e) {
-   e.preventDefault();
-   const user_id = this.props.currentUser.id;
-   const id = this.props.params.projectId;
-   const project = Object.assign({ user_id, id }, this.state);
-   this.props.processForm(project)
-    .then((data) => this.props.router.push(`/projects/${data.project.id}`));
- }
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.isOwner()) {
+      const user_id = this.props.currentUser.id;
+      const id = this.props.params.projectId;
+      const project = Object.assign({ user_id, id }, this.state);
+      this.props.processForm(project)
+      .then((data) => this.props.router.push(`/projects/${data.project.id}`));
+    } else {
+      this.props.router.push(`/project/${data.project.id}`);
+    }
+  }
+
+  isOwner() {
+    if (this.props.formType === "new" ||
+      this.props.currentUser.id === this.props.projectDetail.user.id) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   updateTitle(e) {
     this.setState({ title: e.currentTarget.value });
@@ -42,6 +59,16 @@ class ProjectForm extends React.Component {
 
   updateIntro(e) {
     this.setState({ intro: e.currentTarget.value })
+  }
+
+  handleDelete(e) {
+    e.preventDefault();
+    if (this.isOwner()) {
+      this.props.deleteProject(this.props.projectDetail.id)
+        .then(() => this.props.router.push("/"));
+    } else {
+      this.props.router.push("/");
+    }
   }
 
   makeDeleteBtn() {
@@ -57,6 +84,24 @@ class ProjectForm extends React.Component {
     }
   }
 
+  displayErrors() {
+    const errors = this.props.projectDetail.errors;
+    if (!errors.length > 0) {
+      return
+    }
+    return (
+      <div className="project-error-wrapper clearfix">
+        <ul className="project-errors">
+          {errors.map((err, idx) => (
+            <li key={idx}>
+              {err}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div className="project-form">
@@ -68,7 +113,7 @@ class ProjectForm extends React.Component {
           <section className="project-form-body">
             <form className="project-form-content"
               onSubmit={this.handleSubmit}>
-              <label for="title">Title</label>
+              <label htmlFor="title">Title</label>
               <input
                 type="text"
                 id="title"
@@ -77,7 +122,7 @@ class ProjectForm extends React.Component {
                 placeholder="Title"
                 value={this.state.title}
                 onChange={this.updateTitle}/>
-              <label for="intro">Introduction</label>
+              <label htmlFor="intro">Introduction</label>
               <textarea
                 id="intro"
                 name="intro"
@@ -85,6 +130,7 @@ class ProjectForm extends React.Component {
                 placeholder="Introduction"
                 value={this.state.intro}
                 onChange={this.updateIntro}/>
+              {this.displayErrors()}
               <button className="btn btn-orange" onClick={ this.handleSubmit }>
                 Publish
               </button>

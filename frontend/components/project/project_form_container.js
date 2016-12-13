@@ -1,5 +1,11 @@
 import { connect } from 'react-redux';
-import { createProject, editProject, fetchSingleProject } from '../../actions/project_actions';
+import {
+  createProject,
+  editProject,
+  deleteProject,
+  clearProjectErrors,
+  fetchSingleProject
+} from '../../actions/project_actions';
 import ProjectForm from './project_form';
 
 
@@ -17,7 +23,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     formType,
     processForm: (project) => dispatch(formAction(project)),
-    fetchSingleProject: (id) => dispatch(fetchSingleProject(id))
+    fetchSingleProject: (id) => dispatch(fetchSingleProject(id)),
+    deleteProject: (id) => dispatch(deleteProject(id)),
+    clearProjectErrors: () => dispatch(clearProjectErrors())
   }
 }
 
