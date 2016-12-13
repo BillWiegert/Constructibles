@@ -12,6 +12,19 @@ class ProjectForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateIntro = this.updateIntro.bind(this);
     this.updateTitle = this.updateTitle.bind(this);
+    this.updateState = this.updateState.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.fetchSingleProject(this.props.params.projectId)
+    .then(this.updateState);
+  }
+
+  updateState() {
+    this.setState ({
+      title: this.props.projectDetail.title,
+      intro: this.props.projectDetail.intro
+    });
   }
 
  handleSubmit(e) {
@@ -31,24 +44,54 @@ class ProjectForm extends React.Component {
     this.setState({ intro: e.currentTarget.value })
   }
 
+  makeDeleteBtn() {
+    if (this.props.formType === "edit") {
+      return (
+        <button className="btn btn-delete btn-red"
+          onClick={this.handleDelete}>
+          Delete
+        </button>
+      );
+    } else {
+      return null;
+    }
+  }
+
   render() {
     return (
-      <form
-        onSubmit={this.handleSubmit}
-        className={`project-form ${this.props.formType}`}>
-        <h3 className="project-form-title">{this.props.formType} Project</h3>
-        <input
-          type="text"
-          className="project-title-input"
-          placeholder="Title"
-          onChange={this.updateTitle}/>
-        <input
-          type="text"
-          className="project-intro-input"
-          placeholder="Introduction"
-          onChange={this.updateIntro}/>
-        <button onClick={ this.handleSubmit }>Submit</button>
-      </form>
+      <div className="project-form">
+        <div className={`project-form-wrapper ${this.props.formType}`}>
+          <header className="project-form-header">
+            <h1 className="project-form-title">{this.props.formType} Project</h1>
+            {this.makeDeleteBtn()}
+          </header>
+          <section className="project-form-body">
+            <form className="project-form-content"
+              onSubmit={this.handleSubmit}>
+              <label for="title">Title</label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                className="project-title-input"
+                placeholder="Title"
+                value={this.state.title}
+                onChange={this.updateTitle}/>
+              <label for="intro">Introduction</label>
+              <textarea
+                id="intro"
+                name="intro"
+                className="project-intro-input"
+                placeholder="Introduction"
+                value={this.state.intro}
+                onChange={this.updateIntro}/>
+              <button className="btn btn-orange" onClick={ this.handleSubmit }>
+                Publish
+              </button>
+            </form>
+          </section>
+        </div>
+      </div>
     );
   }
 

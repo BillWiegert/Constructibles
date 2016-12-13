@@ -8,12 +8,14 @@ const ProjectIndexItem = ({ project, router }) => {
         <div className="cover-image"></div>
       </Link>
       <div className="project-info-bar">
-        <span className="title">
-          { project.title }
-        </span>
+        <Link to={ `/projects/${project.id}` }>
+          <span className="title">
+            { project.title }
+          </span>
+        </Link>
         <br/>
         <span className="author">
-          { project.user.username }
+          by { project.user.username }
         </span>
       </div>
     </div>

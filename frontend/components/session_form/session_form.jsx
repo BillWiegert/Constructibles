@@ -72,9 +72,13 @@ class SessionForm extends React.Component {
 
   render() {
     let actionName = this.props.formType;
+    let buttonColor = "orange";
     if (actionName === 'signup') {
+      buttonColor = "green";
       actionName = "sign up";
     }
+
+
 
     return (
       <form onSubmit={this.handleSubmit} className="auth-form">
@@ -99,7 +103,7 @@ class SessionForm extends React.Component {
           />
 
         {this.displayErrors()}
-        <button className={`btn-submit btn-${this.props.formType}`} type="submit">{actionName}</button>
+        <button className={`btn-submit btn-${buttonColor}`} type="submit">{actionName}</button>
         </div>
         <footer className="auth-form-footer">
           {this.oppositeLink()}

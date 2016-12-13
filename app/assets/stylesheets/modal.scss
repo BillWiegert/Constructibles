@@ -53,26 +53,6 @@
     margin-bottom: 20px;
   }
 
-  .btn-login {
-    background: #E86C00;
-    border-color: #CF6000;
-  }
-
-  .btn-signup {
-    background: #5BB75B;
-    border-color: #5BB75B;
-  }
-
-  .btn-login:hover, .btn-login:focus {
-    outline: none;
-    background-color: darken(#E86C00, 5%);
-  }
-
-  .btn-signup:hover, .btn-signup:focus {
-    outline: none;
-    background-color: darken(#5BB75B, 5%);
-  }
-
   .btn-close {
     background: transparent;
     float: right;

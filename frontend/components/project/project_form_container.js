@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
-import { createProject, editProject } from '../../actions/project_actions';
+import { createProject, editProject, fetchSingleProject } from '../../actions/project_actions';
 import ProjectForm from './project_form';
+
 
 const mapStateToProps = ({ projectDetail, session }) => {
   return {
-    errors: projectDetail.errors,
+    projectDetail,
     currentUser: session.currentUser
   }
 }
@@ -15,7 +16,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
   return {
     formType,
-    processForm: (project) => dispatch(formAction(project))
+    processForm: (project) => dispatch(formAction(project)),
+    fetchSingleProject: (id) => dispatch(fetchSingleProject(id))
   }
 }
 

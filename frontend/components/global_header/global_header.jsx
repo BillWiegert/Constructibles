@@ -18,6 +18,7 @@ class GlobalHeader extends React.Component {
     this.openLoginModal = this.openLoginModal.bind(this);
     this.openSignUpModal = this.openSignUpModal.bind(this);
     this.handlePublish = this.handlePublish.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   openModal(e = false) {
@@ -62,6 +63,12 @@ class GlobalHeader extends React.Component {
     }
   }
 
+  handleLogout(e) {
+    e.preventDefault();
+    this.props.logout();
+    this.props.router.push("/");
+  }
+
   logoutLink() {
     return (
       <nav className="current-user-nav">
@@ -71,7 +78,7 @@ class GlobalHeader extends React.Component {
         <span className="pipe">|</span>
         <button
           className="btn-session-link"
-          onClick={this.props.logout}>Log Out</button>
+          onClick={this.handleLogout}>Log Out</button>
       </nav>
     );
   }

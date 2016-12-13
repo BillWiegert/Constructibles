@@ -1,0 +1,62 @@
+.project-form {
+  background-color: #d4e1e7;
+
+  .project-form-wrapper {
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px;
+  }
+
+  .project-form-header {
+    background-color: #f6f6f6;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 9px 9px 0 0;
+    line-height: normal;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+
+  .project-form-body {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 9px 9px;
+    min-height: 200px;
+  }
+
+  .project-form-content {
+    width: 80%;
+    margin: 0 auto;
+
+    textarea, input {
+      margin: 0 auto;
+      margin-bottom: 20px;
+      padding: 4px 8px;
+      line-height: 24px;
+      display: block;
+      width: 100%;
+      resize: none;
+      border-radius: 4px;
+    }
+
+    label {
+      font-weight: bold;
+      font-size: 20px;
+      display: block;
+      margin-bottom: 10px;
+    }
+  }
+
+  .project-form-title {
+    display: inline-block;
+  }
+
+  .btn-delete {
+    font-size: 14px;
+    float: right;
+  }
+}

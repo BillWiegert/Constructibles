@@ -27,12 +27,17 @@ body {
 	background: white;
 }
 
+input, textarea {
+	font: inherit;
+}
+
 ol, ul {
 	list-style: none;
 }
 
 a {
 	text-decoration: none;
+	color: inherit;
 }
 
 button {

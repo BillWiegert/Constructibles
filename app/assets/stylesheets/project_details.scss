@@ -1,0 +1,57 @@
+.project-details {
+
+  background-color: #d4e1e7;
+
+  .project-wrapper {
+    width: 80%;
+    max-width: 1000px;
+    height: auto;
+    margin: 0 auto;
+    padding: 40px;
+  }
+
+  .project-details-header {
+    background-color: #f6f6f6;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 9px 9px 0 0;
+    line-height: normal;
+  }
+
+  .project-body {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 9px 9px;
+  }
+
+  .project-title {
+    font-weight: bold;
+    font-size: 24px;
+    display: inline;
+    margin-right: 5px;
+  }
+
+  .author {
+    display: inline-block;
+  }
+
+  .step-title {
+    font-size: 22px;
+    margin: 12px 0;
+    font-weight: bold;
+  }
+
+  .project-intro, .step-body {
+    font-size: 17px;
+    line-height: 24px;
+    padding-bottom: 26px;
+    margin-bottom: 30px;
+  }
+
+  .edit-btn {
+    float: right;
+  }
+}

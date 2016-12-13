@@ -24,7 +24,7 @@ textarea, input[type="text"], input[type="password"] {
 @media all and (max-width: 1050px) {
   .top-bar-container {
     width: 100%;
-    min-width: 810px;
+    min-width: 830px;
   }
 }
 
@@ -48,6 +48,52 @@ textarea, input[type="text"], input[type="password"] {
 
 .fun-font {
   font-family: complete_in_him;
+}
+
+.btn {
+  padding: 9px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn:hover {
+  cursor: pointer;
+  border-color: #aaa;
+}
+
+.btn-orange {
+  color: white;
+  background: #E86C00;
+  border-color: #CF6000;
+  color: #fff;
+}
+
+.btn-orange:hover, .btn-orange:focus {
+  outline: none;
+  background-color: darken(#E86C00, 5%);
+}
+
+.btn-green {
+  color: white;
+  background: #5BB75B;
+  border-color: #5BB75B;
+}
+
+.btn-green:hover, .btn-green:focus {
+  outline: none;
+  background-color: darken(#5BB75B, 5%);
+}
+
+.btn-red {
+  color: white;
+  background: #f00;
+  border-color: darken(#f00, 15%);
+}
+
+.btn-red:hover, .btn-red:focus {
+  outline: none;
+  background-color: darken(#f00, 10%);
+  border-color: darken(#f00, 20%);
 }
 
 .btn-session-link {
@@ -117,16 +163,8 @@ textarea, input[type="text"], input[type="password"] {
   }
 
   .btn {
-    padding: 9px 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
     float: left;
     margin-left: 20px;
-  }
-
-  .btn:hover {
-    cursor: pointer;
-    border-color: #aaa;
   }
 
   .btn:first-child {
