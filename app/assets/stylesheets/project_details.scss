@@ -44,14 +44,33 @@
     font-weight: bold;
   }
 
-  .project-intro, .step-body {
-    font-size: 17px;
-    line-height: 24px;
+  .intro-container, .step-container {
     padding-bottom: 26px;
     margin-bottom: 30px;
   }
 
+  .project-intro, .step-body {
+    font-size: 17px;
+    line-height: 24px;
+    margin: 20px;
+
+  }
+
+  .image-container {
+    padding: 15px;
+    background-color: #f6f6f6;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 35px;
+  }
+
+  .intro-image, .step-image {
+    width: 100%;
+    display: block;
+  }
+
   .edit-btn {
     float: right;
+    font-weight: bold;
   }
 }

@@ -31,6 +31,7 @@ project_id|integer|not null, foreign key (references projects), indexed
 column name|data type|details
 ---|---|---
 id|integer|not null, primary key
+title|string|not null
 body|text|not null
 image_url|string|allow null
 order|integer|not null

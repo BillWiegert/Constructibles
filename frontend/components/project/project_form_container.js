@@ -13,8 +13,8 @@ const mapStateToProps = ({ projectDetail, session }) => {
   return {
     projectDetail,
     currentUser: session.currentUser
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const formType = ownProps.location.pathname.split("/").pop();

@@ -96,6 +96,14 @@ textarea, input[type="text"], input[type="password"] {
   border-color: darken(#f00, 20%);
 }
 
+.btn-gray {
+  background-color: #eee;
+}
+
+.btn-gray:hover {
+  background-color: #e6e6e6; 
+}
+
 .btn-session-link {
   background: none;
   border: none;

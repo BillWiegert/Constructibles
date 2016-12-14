@@ -25,6 +25,32 @@ class ProjectDetails extends React.Component {
     }
   }
 
+  renderSteps() {
+    const steps = this.props.projectDetail.steps;
+    if (!steps || steps.length === 0) {
+      return null;
+    }
+    return (
+      <div className="steps">
+        {steps.map((step) => (
+          <div key={`step-${step.order}`}
+            className={`step-${step.order} step-container`}>
+            <h2 className="step-title">
+              {`Step ${step.order}: ${step.title}`}
+            </h2>
+            <div className="step-body">
+              <div className="image-container">
+                <img src={step.image_url}
+                  className="step-image"/>
+              </div>
+              <p>{step.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   render() {
     const project = this.props.projectDetail;
     return (
@@ -39,21 +65,16 @@ class ProjectDetails extends React.Component {
             {this.editButton()}
           </header>
           <section className="project-body">
-            <p className="project-intro">
-              {project.intro}
-            </p>
-            <h2 className="step-title">
-              Step 1: The first step
-            </h2>
-            <p className="step-body">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <h2 className="step-title">
-              Step 2: The first step
-            </h2>
-            <p className="step-body">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            <div className="intro-container">
+              <div className="image-container">
+                <img src={project.cover_image_url}
+                  className="intro-image"/>
+              </div>
+              <p className="project-intro">
+                {project.intro}
+              </p>
+            </div>
+            {this.renderSteps()}
           </section>
         </div>
       </div>

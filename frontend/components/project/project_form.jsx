@@ -1,19 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router';
+import StepForm from '../step/step_form_container';
 
 class ProjectForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       title: "",
-      intro: ""
+      intro: "",
+      steps_attributes: []
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleAddStep = this.handleAddStep.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
     this.updateIntro = this.updateIntro.bind(this);
     this.updateTitle = this.updateTitle.bind(this);
     this.updateState = this.updateState.bind(this);
+    this.updateStep = this.updateStep.bind(this);
   }
 
   componentWillMount() {
@@ -27,7 +32,8 @@ class ProjectForm extends React.Component {
   updateState() {
     this.setState ({
       title: this.props.projectDetail.title,
-      intro: this.props.projectDetail.intro
+      intro: this.props.projectDetail.intro,
+      steps_attributes: this.props.projectDetail.steps
     });
   }
 
@@ -71,6 +77,15 @@ class ProjectForm extends React.Component {
     }
   }
 
+  handleCancel(e) {
+    e.preventDefault();
+    if (this.props.formType === "edit") {
+      this.props.router.push(`/projects/${this.props.projectDetail.id}`);
+    } else {
+      this.props.router.push("/");
+    }
+  }
+
   makeDeleteBtn() {
     if (this.props.formType === "edit") {
       return (
@@ -82,6 +97,15 @@ class ProjectForm extends React.Component {
     } else {
       return null;
     }
+  }
+
+  makeCancelBtn() {
+    return (
+      <button className="btn btn-gray btn-cancel"
+        onClick={this.handleCancel}>
+        Cancel
+      </button>
+    )
   }
 
   displayErrors() {
@@ -102,12 +126,71 @@ class ProjectForm extends React.Component {
     );
   }
 
+  updateStep(index, attr) {
+    return function(e) {
+      const steps_attributes = this.state.steps_attributes.slice();
+      steps_attributes[index][attr] = e.currentTarget.value;
+      this.setState({
+        steps_attributes
+      });
+    }.bind(this);
+  }
+
+  renderStepForm(step) {
+    return (
+      <div className={`step-${step.order}`}>
+        <label className="step-label"
+          htmlFor={`step-${step.order}-title`}>
+          Step {step.order}:
+        </label>
+        <input type="text"
+          className="step-title-input"
+          id={`step-${step.order}-title`}
+          placeholder="Title"
+          value={step.title}
+          onChange={this.updateStep(step.order - 1, "title")}>
+        </input>
+        <textarea className="step-body-input"
+          id={`step-${step.order}-body`}
+          placeholder="Body"
+          value={step.body}
+          onChange={this.updateStep(step.order - 1, "body")}>
+        </textarea>
+      </div>
+    );
+  }
+
+  renderSteps() {
+    return this.state.steps_attributes.map(
+      (step, idx) => (this.renderStepForm(step))
+    );
+  }
+
+  nextStep() {
+    const order = this.state.steps_attributes.length + 1;
+    return ({
+      title: "",
+      body:"",
+      order
+    })
+  }
+
+  handleAddStep(e) {
+    e.preventDefault();
+    const steps_attributes = this.state.steps_attributes.slice();
+    steps_attributes.push(this.nextStep());
+    this.setState({
+      steps_attributes
+    });
+  }
+
   render() {
     return (
       <div className="project-form">
         <div className={`project-form-wrapper ${this.props.formType}`}>
           <header className="project-form-header">
             <h1 className="project-form-title">{this.props.formType} Project</h1>
+            {this.makeCancelBtn()}
             {this.makeDeleteBtn()}
           </header>
           <section className="project-form-body">
@@ -125,12 +208,16 @@ class ProjectForm extends React.Component {
               <label htmlFor="intro">Introduction</label>
               <textarea
                 id="intro"
-                name="intro"
+                name="introduction"
                 className="project-intro-input"
                 placeholder="Introduction"
                 value={this.state.intro}
                 onChange={this.updateIntro}/>
+              {this.renderSteps()}
               {this.displayErrors()}
+              <button className="btn btn-gray btn-add-step" onClick={ this.handleAddStep }>
+                Add Step
+              </button>
               <button className="btn btn-orange" onClick={ this.handleSubmit }>
                 Publish
               </button>

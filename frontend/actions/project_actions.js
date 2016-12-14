@@ -50,7 +50,8 @@ export const createProject = (project) => {
   return (dispatch) => {
     return APIUtil.createProject(project)
     .then((project) => dispatch(receiveProject(project)),
-      (err) => dispatch(receiveProjectErrors(err.responseJSON)));
+      (err) => dispatch(receiveProjectErrors(err.responseJSON))
+    );
   };
 };
 
@@ -58,9 +59,11 @@ export const editProject = (project) => {
   return (dispatch) => {
     return APIUtil.editProject(project)
     .then((project) => dispatch(receiveProject(project)),
-      (err) => dispatch(receiveProjectErrors(err.responseJSON)));
+      (err) => dispatch(receiveProjectErrors(err.responseJSON))
+    );
   };
 };
+
 export const deleteProject = (id) => {
   return (dispatch) => {
     return APIUtil.deleteProject(id)

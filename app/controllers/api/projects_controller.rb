@@ -36,7 +36,12 @@ class Api::ProjectsController < ApplicationController
     render :show
   end
 
+  private
+
   def project_params
-    params.require(:project).permit(:title, :intro)
+    params
+      .require(:project)
+      .permit(:title, :intro, steps_attributes: [:id, :title, :body, :order])
   end
+
 end

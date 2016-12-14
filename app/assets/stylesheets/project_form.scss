@@ -39,9 +39,14 @@
       line-height: 24px;
       display: block;
       width: 100%;
-      resize: none;
+      resize: vertical;
       border-radius: 4px;
       box-sizing: border-box;
+    }
+
+    textarea {
+      min-height: 200px;
+      height: auto;
     }
 
     label {
@@ -77,8 +82,16 @@
     }
   }
 
-  .btn-delete {
+  .btn-delete, .btn-cancel {
     font-size: 14px;
     float: right;
+  }
+
+  .btn-delete {
+    margin-right: 5px;
+  }
+
+  .btn-add-step {
+    margin-right: 5px;
   }
 }
