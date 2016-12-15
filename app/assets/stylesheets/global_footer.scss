@@ -1,0 +1,54 @@
+.global-footer {
+    background: #404040;
+    color: #777;
+
+  .footer-nav {
+      width: 80%;
+      margin: 0 auto;
+      padding: 15px 0;
+  }
+
+  .btn {
+    border-color: #777;
+  }
+
+  .btn:hover, .btn:focus {
+    border-color: #bbb;
+    color: #bbb;
+    background-color: #555;
+  }
+
+  .divider {
+    border-top: 1.5px solid #323232;
+    border-bottom: 1px solid #545454;
+    margin: 15px 0;
+  }
+
+  span {
+    display: inline-block;
+    margin: 10px 0;
+    margin-right: 20px;
+
+    a {
+      color: #888;
+    }
+
+    a:hover {
+      color: #bbb;
+    }
+  }
+
+  .footer-links {
+      float: right;
+  }
+
+  .footer-links > li {
+      float: left;
+      margin-left: 10px;
+  }
+
+  .footer-links > li > a {
+      display: block;
+  }
+
+}
