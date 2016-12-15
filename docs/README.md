@@ -14,9 +14,9 @@ Constructibles is a web application modeled after Instructables. It was built us
 
 - [x] Hosting on Heroku
 - [x] New Account creation, login, and guest/demo login
-- [ ] Projects
+- [x] Projects
 - [ ] Commenting on Projects
-- [ ] Adding photos and videos to Projects
+- [x] Adding photos and videos to Projects
 - [ ] Searching projects by keyword
 - [ ] Production README
 

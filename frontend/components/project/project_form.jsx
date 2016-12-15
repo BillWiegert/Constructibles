@@ -8,6 +8,8 @@ class ProjectForm extends React.Component {
     this.state = {
       title: "",
       intro: "",
+      imageFile: null,
+      imageUrl: null,
       steps_attributes: []
     };
 
@@ -19,6 +21,8 @@ class ProjectForm extends React.Component {
     this.updateTitle = this.updateTitle.bind(this);
     this.updateState = this.updateState.bind(this);
     this.updateStep = this.updateStep.bind(this);
+    this.updateFile = this.updateFile.bind(this);
+    this.updateStepImage = this.updateStepImage.bind(this);
   }
 
   componentWillMount() {
@@ -33,6 +37,7 @@ class ProjectForm extends React.Component {
     this.setState ({
       title: this.props.projectDetail.title,
       intro: this.props.projectDetail.intro,
+      imageUrl: this.props.projectDetail.cover_image_url,
       steps_attributes: this.props.projectDetail.steps
     });
   }
@@ -40,11 +45,30 @@ class ProjectForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     if (this.isOwner()) {
-      const user_id = this.props.currentUser.id;
       const id = this.props.params.projectId;
-      const project = Object.assign({ user_id, id }, this.state);
-      this.props.processForm(project)
-      .then((data) => this.props.router.push(`/projects/${data.project.id}`));
+      const project = Object.assign({ id }, this.state);
+
+      let formData = new FormData();
+      formData.append("project[title]", project.title);
+      formData.append("project[intro]", project.intro);
+      formData.append("project[id]", project.id);
+      project.steps_attributes.forEach((step) => {
+        Object.keys(step).forEach((key) => {
+          if (key === "imageFile") {
+            if (step.imageFile) {
+              formData.append("project[steps_attributes][][image]", step.imageFile);
+            }
+          } else if (key != "imageUrl") {
+            formData.append(`project[steps_attributes][][${key}]`, step[key]);
+          }
+        });
+      });
+      if (project.imageFile) {
+        formData.append("project[cover_image]", project.imageFile);
+      }
+      this.props.processForm(formData)
+        .then((data) => this.props.router
+        .push(`/projects/${data.project.id}`));
     } else {
       this.props.router.push(`/project/${data.project.id}`);
     }
@@ -80,7 +104,8 @@ class ProjectForm extends React.Component {
   handleCancel(e) {
     e.preventDefault();
     if (this.props.formType === "edit") {
-      this.props.router.push(`/projects/${this.props.projectDetail.id}`);
+      this.props.router
+        .push(`/projects/${this.props.projectDetail.id}`);
     } else {
       this.props.router.push("/");
     }
@@ -136,9 +161,45 @@ class ProjectForm extends React.Component {
     }.bind(this);
   }
 
+  updateStepImage(index) {
+    return function(e) {
+      const file = e.currentTarget.files[0];
+      const fileReader = new FileReader();
+      fileReader.onloadend = function () {
+        const steps_attributes = this.state.steps_attributes.slice();
+        steps_attributes[index].imageFile = file;
+        steps_attributes[index].imageUrl = fileReader.result;
+        this.setState({ steps_attributes });
+      }.bind(this);
+
+      if(file) {
+        fileReader.readAsDataURL(file);
+      }
+    }.bind(this);
+  }
+
+  renderStepImage(index) {
+    let imageUrl;
+    if (!this.state.steps_attributes[index].id) {
+      imageUrl = this.state.steps_attributes[index].imageUrl;
+    } else if (this.state.steps_attributes[index].id) {
+      imageUrl = this.state.steps_attributes[index].image;
+    }
+    if (imageUrl) {
+      return (
+        <div className="image-container">
+          <img className="intro-image"
+            src={imageUrl}/>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  }
+
   renderStepForm(step) {
     return (
-      <div className={`step-${step.order}`}>
+      <div className={`step-${step.order}`} key={`step-${step.order}`}>
         <label className="step-label"
           htmlFor={`step-${step.order}-title`}>
           Step {step.order}:
@@ -150,6 +211,14 @@ class ProjectForm extends React.Component {
           value={step.title}
           onChange={this.updateStep(step.order - 1, "title")}>
         </input>
+        <label htmlFor={`step-${step.order}-image`}>Step {step.order} Image</label>
+        {this.renderStepImage(step.order-1)}
+        <input
+          type="file"
+          id={`step-${step.order}-image`}
+          name={`step ${step.order} image input`}
+          className="step-image-input"
+          onChange={this.updateStepImage(step.order - 1)}/>
         <textarea className="step-body-input"
           id={`step-${step.order}-body`}
           placeholder="Body"
@@ -171,7 +240,9 @@ class ProjectForm extends React.Component {
     return ({
       title: "",
       body:"",
-      order
+      order,
+      imageFile: null,
+      imageUrl: null
     })
   }
 
@@ -184,12 +255,35 @@ class ProjectForm extends React.Component {
     });
   }
 
+  updateFile(e) {
+    const file = e.currentTarget.files[0];
+    const fileReader = new FileReader();
+
+    fileReader.onloadend = function () {
+      this.setState({ imageFile: file, imageUrl: fileReader.result  });
+    }.bind(this);
+
+    if(file) {
+      fileReader.readAsDataURL(file);
+    }
+  }
+
+  getImageUrl() {
+    if (this.state.imageUrl) {
+      return this.state.imageUrl;
+    } else {
+      return "https://s3.amazonaws.com/constructibles-dev/placeholder.png";
+    }
+  }
+
   render() {
     return (
-      <div className="project-form">
+      <section className="project-form">
         <div className={`project-form-wrapper ${this.props.formType}`}>
           <header className="project-form-header">
-            <h1 className="project-form-title">{this.props.formType} Project</h1>
+            <h1 className="project-form-title">
+              {this.props.formType} Project
+            </h1>
             {this.makeCancelBtn()}
             {this.makeDeleteBtn()}
           </header>
@@ -205,6 +299,17 @@ class ProjectForm extends React.Component {
                 placeholder="Title"
                 value={this.state.title}
                 onChange={this.updateTitle}/>
+              <label htmlFor="intro-image">Cover Image</label>
+              <div className="image-container">
+                <img className="intro-image"
+                  src={this.getImageUrl()}/>
+              </div>
+              <input
+                type="file"
+                id="intro-image"
+                name="cover image"
+                className="intro-image-input"
+                onChange={this.updateFile}/>
               <label htmlFor="intro">Introduction</label>
               <textarea
                 id="intro"
@@ -215,16 +320,20 @@ class ProjectForm extends React.Component {
                 onChange={this.updateIntro}/>
               {this.renderSteps()}
               {this.displayErrors()}
-              <button className="btn btn-gray btn-add-step" onClick={ this.handleAddStep }>
+              <button
+                className="btn btn-gray btn-add-step"
+                onClick={ this.handleAddStep }>
                 Add Step
               </button>
-              <button className="btn btn-orange" onClick={ this.handleSubmit }>
+              <button
+                className="btn btn-orange"
+                onClick={ this.handleSubmit }>
                 Publish
               </button>
             </form>
           </section>
         </div>
-      </div>
+      </section>
     );
   }
 

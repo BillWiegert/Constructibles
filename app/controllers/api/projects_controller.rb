@@ -41,7 +41,7 @@ class Api::ProjectsController < ApplicationController
   def project_params
     params
       .require(:project)
-      .permit(:title, :intro, steps_attributes: [:id, :title, :body, :order])
+      .permit(:title, :intro, :cover_image, steps_attributes: [:id, :title, :image, :body, :order])
   end
 
 end

@@ -16,17 +16,21 @@ export const createProject = (project) => {
   return $.ajax({
     method: 'POST',
     url: 'api/projects',
-    contentType: 'application/json',
-    data: JSON.stringify({project})
+    dataType: 'json',
+    contentType: false,
+    processData: false,
+    data: project
   })
 }
 
 export const editProject = (project) => {
   return $.ajax({
     method: 'PATCH',
-    url: `api/projects/${project.id}`,
-    contentType: 'application/json',
-    data: JSON.stringify({project})
+    url: `api/projects/${project.get("project[id]")}`,
+    dataType: 'json',
+    contentType: false,
+    processData: false,
+    data: project
   })
 }
 

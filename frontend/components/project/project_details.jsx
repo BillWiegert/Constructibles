@@ -25,11 +25,26 @@ class ProjectDetails extends React.Component {
     }
   }
 
+  renderStepImage(step) {
+    if (step.image_url == "/images/original/missing.png") {
+      return null;
+    } else {
+      return (
+        <div className="image-container">
+          <img src={step.image_url}
+            className="step-image"/>
+        </div>
+      );
+    }
+  }
+
+
   renderSteps() {
     const steps = this.props.projectDetail.steps;
     if (!steps || steps.length === 0) {
       return null;
     }
+
     return (
       <div className="steps">
         {steps.map((step) => (
@@ -39,10 +54,7 @@ class ProjectDetails extends React.Component {
               {`Step ${step.order}: ${step.title}`}
             </h2>
             <div className="step-body">
-              <div className="image-container">
-                <img src={step.image_url}
-                  className="step-image"/>
-              </div>
+              {this.renderStepImage(step)}
               <p>{step.body}</p>
             </div>
           </div>
@@ -54,7 +66,7 @@ class ProjectDetails extends React.Component {
   render() {
     const project = this.props.projectDetail;
     return (
-      <div className="project-details">
+      <section className="project-details">
         <div className="project-wrapper">
           <header className="project-details-header">
             <h1 className="project-title">
@@ -77,7 +89,7 @@ class ProjectDetails extends React.Component {
             {this.renderSteps()}
           </section>
         </div>
-      </div>
+      </section>
     );
   }
 }
