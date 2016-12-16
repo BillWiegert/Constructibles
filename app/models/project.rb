@@ -23,5 +23,9 @@ class Project < ActiveRecord::Base
   belongs_to :user
   has_many :steps, dependent: :destroy
   accepts_nested_attributes_for :steps
+
+  has_many :project_keywords, dependent: :destroy
+  has_many :keywords, through: :project_keywords
+  accepts_nested_attributes_for :keywords
   # belongs_to :category
 end

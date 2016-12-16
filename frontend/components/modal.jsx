@@ -15,7 +15,10 @@ const Modal = ({ isOpen, closeCallback, transitionName, addClass, children }) =>
         </ReactCSSTransitionGroup>
     );
   } else {
-    // return <ReactCSSTransitionGroup transitionName={ transitionName } />;
+    return <ReactCSSTransitionGroup
+      transitionName={ transitionName }
+      transitionEnterTimeout={500}
+      transitionLeaveTimeout={300} />;
     return null;
   }
 }

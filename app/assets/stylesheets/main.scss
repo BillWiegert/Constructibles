@@ -6,6 +6,26 @@
     font-style: normal;
 }
 
+.modal-anim-enter {
+  top: -200px;
+  opacity: 0.01;
+}
+
+.modal-anim-enter-active {
+  top: 98px;
+  opacity: 1;
+  transition: all .3s ease-out;
+}
+
+.modal-anim-leave {
+  opacity: 1;
+}
+
+.modal-anim-leave-active {
+  opacity: 0.01;
+  transition: opacity .2s ease-in;
+}
+
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;

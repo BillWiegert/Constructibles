@@ -11,10 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161214214545) do
+ActiveRecord::Schema.define(version: 20161215223720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "keywords", force: :cascade do |t|
+    t.string   "word",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "keywords", ["word"], name: "index_keywords_on_word", using: :btree
+
+  create_table "project_keywords", force: :cascade do |t|
+    t.integer  "project_id", null: false
+    t.integer  "keyword_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string   "title",                    null: false

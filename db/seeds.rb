@@ -1,49 +1,15 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
-User.delete_all
-users = User.create([
-  { username: "Guest", password: "password"},
-  { username: "ConstructiveCarl", password: "hunter12" },
-  { username: "FlourPower", password: "fullybaked42"},
-  { username: "BobTheBuilder", password: "canwebuildit" }
+Project.create!([
+  {title: "DIY Scratching Post", intro: "Never, ever, ever will I have a cat declawed. I have decided that cats have claws and if I have cats I have to deal with that fact. If I didn’t want cat claws then I shouldn’t have gotten cats.\r\n\r\nIf you don’t have cats, you may envision my home with wrecked furniture and scratched up rugs, but that isn’t the case. You can train cats to use a scratching post and you can trim their nails.\r\n\r\nWhich is why I didn’t even flinch when purchasing a cat scratching post last year. I paid $40 and it was a really great one compared to a lot of them I had seen. It lasted a few months before the covering started to come off and it had to be replaced. When I noticed that the cats were getting pissy with their post, I knew it was time to replace it.\r\n\r\nThe thing is, most of the affordable cat scratching posts were covered with carpet instead of sisal. I don’t know about you, but if you don’t want cats scratching up the rugs in your house, the idea of covering their scratching area with that seems counterproductive to me. Sick of it all, I decided to head to the hardware store and  make one from scratch.", user_id: 2, cover_image_file_name: "scratching_post_cover.jpg", cover_image_content_type: "image/jpeg", cover_image_file_size: 185836, cover_image_updated_at: "2016-12-16 15:30:13"}
 ])
-
-Project.delete_all
-projects = Project.create([
-  {
-    title: "DIY scratching post",
-    intro: "My cat likes scratching so I made this post.",
-    user_id: users[1].id
-  },
-  {
-    title: "My first project!",
-    intro: "This is my first project.",
-    user_id: users.first.id
-  },
-  {
-    title: "DIY Log Cabin",
-    intro: "Can you build it? Yes, you can!",
-    user_id: users[3].id
-  },
-  {
-    title: "Homemade Apple Pie",
-    intro: "Quick and easy apple pie.",
-    user_id: users[2].id
-  },
-  {
-    title: "My Second Project!",
-    intro: "This is my second project.",
-    user_id: users.first.id
-  },
-  {
-    title: "My Third Project!",
-    intro: "This is my third project.",
-    user_id: users.first.id
-  }
+Step.create!([
+  {title: "Materials", body: "This one was more expensive that $40 BUT this baby is going to last a lifetime. It’s just that heavy duty. If you want to quell your cat’s urge to scratch for the long haul, you will need:\r\n\r\n3/4 inch plywood, 18 x 18 inch square\r\n4×4 wood post, 2.5 feet long\r\n3/4 inch decorative wood trim, at least 3.5 feet\r\nmitre box\r\nhack saw\r\nwood glue\r\ntrim nails\r\nhammer\r\nlong wood screws\r\n100 ft sisal rope (not synthetic)\r\nwood bit a smidge smaller than your screws\r\npower drill\r\n4×4 decorative cap\r\nwood stain\r\nrug (optional)", order: 1, project_id: 1, image_file_name: nil, image_content_type: nil, image_file_size: nil, image_updated_at: nil},
+  {title: "Mounting the post", body: "Draw out the placement for your 4×4 post. When working with a square, I like to draw lines extending from each corner to make an “X” across the wood face. Align the square shape of your post’s corners on each of the lines for a perfect center. Trace the square with a pencil.\r\n\r\nPut a thin line of wood glue inside of the square you have drawn. Place the post inside and hold. Clean up any glue that squeezes out, if necessary.", order: 2, project_id: 1, image_file_name: "post_setup.jpg", image_content_type: "image/jpeg", image_file_size: 136620, image_updated_at: "2016-12-16 15:30:13"},
+  {title: "Decoration", body: "At this point I decided to add carpet to the plywood to make it a bit prettier. I didn’t take pictures of the process and for that I am sorry. It was basically cutting up a rug to size with a 4×4 square in the middle and with a slit at the back to wrap on the plywood and around the 4×4. Use wood glue to affix.", order: 3, project_id: 1, image_file_name: "post_painted.jpg", image_content_type: "image/jpeg", image_file_size: 128099, image_updated_at: "2016-12-16 15:30:13"},
+  {title: "Rope Wrap", body: "Take the end of your sisal rope and using your hammer and trim screws, attach to the 4×4 at the bottom. Wrap the rope snugly around the post occasionally using a nail to tack down, or as necessary.\r\n\r\nMy old junk one on the left and my fancy new homemade one on the right.\r\n\r\nTake your rope all the way to the top of the post. If you have a metal cap to decorate the top, attach now.\r\n\r\nAnd that’s that! It’s a fairly time consuming process. It cost me $43 before tax, but my last one was $40 plus tax and this one will last so, so much longer. I’m happy with that.", order: 4, project_id: 1, image_file_name: "post_wrapped.jpg", image_content_type: "image/jpeg", image_file_size: 104174, image_updated_at: "2016-12-16 15:30:13"}
+])
+User.create!([
+  {username: "BobTheBuilder", password_digest: "$2a$10$zGPeyhYQvvLIALdRh82nAurS1Dh4ndDnuUILw48LhEp7vDhlSqbQu", session_token: "rRa1Qfg1b5MmK4thf3XGGg"},
+  {username: "Guest", password_digest: "$2a$10$kPUkP1JK1QZy9sWK.ZmYV..uyrzkq.VVpesmUfG2MsHdd1QCtQ0ga", session_token: "nGe4q0Q7UY8OZIHwtYDmkQ"},
+  {username: "FlourPower", password_digest: "$2a$10$xfu/HQWLEF04H7egxpi0IeHks3yyCHE6JJc1kIFrZ2KL2MxVUgFEu", session_token: "ibr4tBX6IA2UmzLDP_mbpg"},
+  {username: "ConstructiveCarl", password_digest: "$2a$10$nqaLl/q3p6oShIU8zpQCd.A7YJKWCZ7CDZdaXSrU5GD03k0suBUsu", session_token: "nk4lrzlFZHqVSu6EOB0V3Q"}
 ])

@@ -41,7 +41,11 @@ class Api::ProjectsController < ApplicationController
   def project_params
     params
       .require(:project)
-      .permit(:title, :intro, :cover_image, steps_attributes: [:id, :title, :image, :body, :order])
+      .permit(
+        :title, :intro, :cover_image,
+        steps_attributes: [:id, :title, :image, :body, :order],
+        keywords_attributes: [:id, :word]
+      )
   end
 
 end
