@@ -19,7 +19,7 @@ const Root = ({ store }) => {
   const _requireLogin = (nextState, replace) => {
     const currentUser = store.getState().session.currentUser;
     if (!currentUser) {
-      replace('/login');
+      replace('/');
     }
   }
 

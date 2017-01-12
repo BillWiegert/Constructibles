@@ -58,7 +58,7 @@ class ProjectForm extends React.Component {
             if (step.imageFile) {
               formData.append("project[steps_attributes][][image]", step.imageFile);
             }
-          } else if (key != "imageUrl") {
+          } else if (key != "imageUrl" && key != "image") {
             formData.append(`project[steps_attributes][][${key}]`, step[key]);
           }
         });
@@ -135,7 +135,7 @@ class ProjectForm extends React.Component {
 
   displayErrors() {
     const errors = this.props.projectDetail.errors;
-    if (!errors.length > 0) {
+    if (!errors || !errors.length > 0) {
       return
     }
     return (
@@ -180,12 +180,13 @@ class ProjectForm extends React.Component {
 
   renderStepImage(index) {
     let imageUrl;
-    if (!this.state.steps_attributes[index].id) {
-      imageUrl = this.state.steps_attributes[index].imageUrl;
-    } else if (this.state.steps_attributes[index].id) {
-      imageUrl = this.state.steps_attributes[index].image;
+    const step = this.state.steps_attributes[index];
+    if (step.imageUrl) {
+      imageUrl = step.imageUrl;
+    } else if (step.id) {
+      imageUrl = step.image;
     }
-    if (imageUrl) {
+    if (imageUrl && imageUrl !== "/images/original/missing.png") {
       return (
         <div className="image-container">
           <img className="intro-image"
@@ -193,7 +194,12 @@ class ProjectForm extends React.Component {
         </div>
       );
     } else {
-      return null;
+      return (
+        <div className="image-container">
+          <img className="intro-image"
+            src="https://s3.amazonaws.com/constructibles-dev/placeholder.png"/>
+        </div>
+      )
     }
   }
 
