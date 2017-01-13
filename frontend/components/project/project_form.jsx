@@ -151,24 +151,24 @@ class ProjectForm extends React.Component {
     );
   }
 
-  updateStep(index, attr) {
+  updateStep(order, attr) {
     return function(e) {
-      const steps_attributes = this.state.steps_attributes.slice();
-      steps_attributes[index][attr] = e.currentTarget.value;
+      const steps_attributes = this.orderSteps().slice();
+      steps_attributes[order - 1][attr] = e.currentTarget.value;
       this.setState({
         steps_attributes
       });
     }.bind(this);
   }
 
-  updateStepImage(index) {
+  updateStepImage(order) {
     return function(e) {
       const file = e.currentTarget.files[0];
       const fileReader = new FileReader();
       fileReader.onloadend = function () {
-        const steps_attributes = this.state.steps_attributes.slice();
-        steps_attributes[index].imageFile = file;
-        steps_attributes[index].imageUrl = fileReader.result;
+        const steps_attributes = this.orderSteps().slice();
+        steps_attributes[order - 1].imageFile = file;
+        steps_attributes[order - 1].imageUrl = fileReader.result;
         this.setState({ steps_attributes });
       }.bind(this);
 
@@ -178,9 +178,9 @@ class ProjectForm extends React.Component {
     }.bind(this);
   }
 
-  renderStepImage(index) {
+  renderStepImage(order) {
     let imageUrl;
-    const step = this.state.steps_attributes[index];
+    const step = this.orderSteps()[order - 1];
     if (step.imageUrl) {
       imageUrl = step.imageUrl;
     } else if (step.id) {
@@ -215,30 +215,43 @@ class ProjectForm extends React.Component {
           id={`step-${step.order}-title`}
           placeholder="Title"
           value={step.title}
-          onChange={this.updateStep(step.order - 1, "title")}>
+          onChange={this.updateStep(step.order, "title")}>
         </input>
         <label htmlFor={`step-${step.order}-image`}>Step {step.order} Image</label>
-        {this.renderStepImage(step.order-1)}
+        {this.renderStepImage(step.order)}
         <input
           type="file"
           id={`step-${step.order}-image`}
           name={`step ${step.order} image input`}
           className="step-image-input"
-          onChange={this.updateStepImage(step.order - 1)}/>
+          onChange={this.updateStepImage(step.order)}/>
         <textarea className="step-body-input"
           id={`step-${step.order}-body`}
           placeholder="Body"
           value={step.body}
-          onChange={this.updateStep(step.order - 1, "body")}>
+          onChange={this.updateStep(step.order, "body")}>
         </textarea>
       </div>
     );
   }
 
   renderSteps() {
-    return this.state.steps_attributes.map(
-      (step, idx) => (this.renderStepForm(step))
-    );
+    return this.orderSteps().map(step => (this.renderStepForm(step)));
+  }
+
+  orderSteps() {
+    const steps = this.state.steps_attributes;
+    const orderedSteps = [];
+
+    while (steps.length > orderedSteps.length) {
+      steps.forEach((step) => {
+        if (step.order == orderedSteps.length + 1) {
+          orderedSteps.push(step);
+        }
+      });
+    }
+
+    return orderedSteps;
   }
 
   nextStep() {

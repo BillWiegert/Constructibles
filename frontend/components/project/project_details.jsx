@@ -45,9 +45,19 @@ class ProjectDetails extends React.Component {
       return null;
     }
 
+    const orderedSteps = [];
+
+    while (steps.length > orderedSteps.length) {
+      steps.forEach((step) => {
+        if (step.order == orderedSteps.length + 1) {
+          orderedSteps.push(step);
+        }
+      });
+    }
+
     return (
       <div className="steps">
-        {steps.map((step) => (
+        {orderedSteps.map((step) => (
           <div key={`step-${step.order}`}
             className={`step-${step.order} step-container`}>
             <h2 className="step-title">
