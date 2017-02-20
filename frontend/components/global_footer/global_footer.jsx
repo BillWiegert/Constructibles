@@ -36,7 +36,7 @@ class GlobalFooter extends React.Component {
             </li>
             <li>
               <a className="btn"
-                href="#"
+                href="https://www.linkedin.com/in/bill-wiegert"
                 target="_blank">
                 LinkedIn
               </a>
