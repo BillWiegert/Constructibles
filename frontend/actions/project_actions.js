@@ -32,9 +32,9 @@ export const clearProjectErrors = () => {
   }
 }
 
-export const fetchAllProjects = () => {
+export const fetchAllProjects = (filter) => {
   return (dispatch) => {
-    return APIUtil.fetchAllProjects()
+    return APIUtil.fetchAllProjects(filter)
     .then((projects) => dispatch(receiveProjects(projects)));
   };
 };
