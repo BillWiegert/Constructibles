@@ -22,7 +22,7 @@ Projects are stored in a database table that contains columns for `id`, `title`,
 
 Projects are created with a text input for `title`, textarea for `intro` and file upload for `cover_image`. The same React component is used to render both the project creation and editing forms.
 
-#### Step
+#### Steps
 
 Steps are stored in database as a table that contains columns for `id`, `title`, `body` and `image`. Each step `belongs_to` a project and is destroyed if a project is destroyed.
 
