@@ -1,6 +1,8 @@
 class Api::ProjectsController < ApplicationController
   def index
-    @projects = Project.all
+    #limit projects to only those that match filter if present
+    projects = filter ? Project.matches_filter(filter) : Project.all
+    @projects = projects
   end
 
   def create
@@ -46,6 +48,10 @@ class Api::ProjectsController < ApplicationController
         steps_attributes: [:id, :title, :image, :body, :order],
         keywords_attributes: [:id, :word]
       )
+  end
+
+  def filter
+    params[:filter]
   end
 
 end
