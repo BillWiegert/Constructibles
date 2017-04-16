@@ -27,5 +27,11 @@ class Project < ActiveRecord::Base
   has_many :project_keywords, dependent: :destroy
   has_many :keywords, through: :project_keywords
   accepts_nested_attributes_for :keywords
+
+  def self.matches_filter(filter)
+    filter = "%" + filter + "%"
+    self.where("LOWER(title) LIKE LOWER(?)", filter)
+  end
+
   # belongs_to :category
 end
