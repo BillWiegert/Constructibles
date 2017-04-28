@@ -4,7 +4,7 @@ import ProjectIndexItem from './project_index_item';
 class ProjectIndex extends React.Component {
 
   componentDidMount() {
-    this.props.fetchAllProjects();
+    this.props.fetchAllProjects(this.props.params.filter);
   }
 
   projectIndexItems() {

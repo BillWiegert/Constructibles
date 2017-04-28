@@ -30,6 +30,7 @@ const Root = ({ store }) => {
           <IndexRoute component={ProjectIndexContainer}/>
           <Route path="login" component={SessionFormContainer}/>
           <Route path="projects" component={ProjectIndexContainer}/>
+          <Route path="search/:filter" component={ProjectIndexContainer}/>
           <Route path="projects/new" component={ProjectFormContainer} onEnter={_requireLogin}/>
           <Route path="projects/:projectId" component={ProjectDetailsContainer}/>
           <Route path="projects/:projectId/edit" component={ProjectFormContainer} onEnter={_requireLogin}/>

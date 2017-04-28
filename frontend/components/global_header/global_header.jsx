@@ -9,15 +9,18 @@ class GlobalHeader extends React.Component {
     super(props);
     this.state = {
       isModalOpen: false,
-      formType: 'login'
+      formType: 'login',
+      filter: ""
     }
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
+    this.updateFilter = this.updateFilter.bind(this);
     this.openLoginModal = this.openLoginModal.bind(this);
     this.openSignUpModal = this.openSignUpModal.bind(this);
     this.handlePublish = this.handlePublish.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
   }
 
@@ -54,6 +57,10 @@ class GlobalHeader extends React.Component {
     }
   }
 
+  updateFilter(e) {
+    this.setState({ filter: e.currentTarget.value });
+  }
+
   handlePublish(e) {
     e.preventDefault();
     if (this.props.currentUser) {
@@ -61,6 +68,12 @@ class GlobalHeader extends React.Component {
     } else {
       this.openLoginModal();
     }
+  }
+
+  handleSearch(e) {
+    e.preventDefault();
+    this.props.router
+      .push(`/search/filter=${this.state.filter}`);
   }
 
   handleLogout(e) {
@@ -106,10 +119,18 @@ class GlobalHeader extends React.Component {
       <div className="search-bar">
         <form className="header-search-form">
           <label className="header-search-label fun-font">let's make</label>
-          <input className="header-search-input" type="text"></input>
-          <Link to="/projects" className="material-icons md-light header-search-btn">
+          <input
+            className="header-search-input"
+            type="text"
+            value={this.state.filter}
+            onChange={this.updateFilter}
+          />
+          <button
+            className="material-icons md-light header-search-btn"
+            onClick={this.handleSearch}
+          >
             search
-          </Link>
+          </button>
         </form>
       </div>
     )
