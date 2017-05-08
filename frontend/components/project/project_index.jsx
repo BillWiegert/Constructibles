@@ -7,6 +7,10 @@ class ProjectIndex extends React.Component {
     this.props.fetchAllProjects(this.props.params.filter);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.props.fetchAllProjects(nextProps.params.filter);
+  }
+
   projectIndexItems() {
     return (
       <ul>
