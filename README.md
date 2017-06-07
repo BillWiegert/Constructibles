@@ -40,7 +40,7 @@ Commenting on projects is a nice way for creators to interact with other users o
 
 Rich text editing will be a very useful feature for this site since projects involve a lot of text input. I plan to use Quill.js to implement this feature. It will be used for Projects and Comments. Users will be able to make numbered or bulleted lists which will be very helpful for listing materials.
 
-#### Keywords and Search
+#### Keywords
 
 Searching for projects by keyword will be an essential feature as more projects are created. This will be implemented by adding a keywords table and a project_keywords join table. Keywords will have a many to many relationship with projects. Keywords will be added during project creation or from the project edit page.
 
