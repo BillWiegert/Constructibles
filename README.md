@@ -4,7 +4,7 @@
 
 [live]: http://constructibles.pro
 
-Constructibles is a full-stack web application modeled after Instructables, a website for posting instructions for DIY projects. It was built using Ruby on Rails for the backend, a PostgeSQL database and React-Redux for front end components.
+Constructibles is a full-stack web application modeled after Instructables, a website for posting instructions for DIY projects. It was built using Ruby on Rails for the backend, a PostgreSQL database and React-Redux for front end components.
 
 ## Features and Implementation
 
